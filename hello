@@ -1,0 +1,29 @@
+import os
+
+def search_files(directory, keyword):
+    matches = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if keyword in file:
+                matches.append(os.path.join(root, file))
+    return matches
+
+print("文件搜索命令行工具")
+
+while True:
+    print("\n请输入搜索目录（输入 'q' 退出）：")
+    directory = input("目录路径：")
+    if directory == 'q':
+        print("谢谢使用，再见！")
+        break
+
+    keyword = input("请输入搜索关键字：")
+    
+    matches = search_files(directory, keyword)
+    
+    if not matches:
+        print("没有找到匹配的文件。")
+    else:
+        print("匹配的文件列表：")
+        for match in matches:
+            print(match)
